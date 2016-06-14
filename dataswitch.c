@@ -1,7 +1,7 @@
 /*This Application is created to intract with DataSwitch Service which is running on the android device.
  *Service starts a server in forground.
  *And this application works like client.
- *This is and gui app
+ *This is an gui app
  */
 #include <gtk/gtk.h>
 #include <stdio.h>
