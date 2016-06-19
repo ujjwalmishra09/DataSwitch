@@ -11,10 +11,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class MyService extends Service {
+    private DataSwitch ds;
     @Override
     public void onCreate() {
         super.onCreate();
-        DataSwitch ds = new DataSwitch(2500,(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
+        ds = new DataSwitch(2500,(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
         if(ds.socketOpened)
         ds.start();
 
@@ -40,6 +41,11 @@ public class MyService extends Service {
     public void onDestroy() {
         super.onDestroy();
         stopForeground(true);
+        if(ds.isAlive())
+        {
+         stopServerThread sst=new stopServerThread();
+            sst.start();
+        }
         Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
     }
 }
