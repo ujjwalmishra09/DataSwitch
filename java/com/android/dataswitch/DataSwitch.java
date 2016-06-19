@@ -44,7 +44,7 @@ public class DataSwitch  extends Thread {
     }
     public void run()
     {
-        while(true)
+        while(socketOpened)
         {
             try (
 
@@ -84,6 +84,14 @@ public class DataSwitch  extends Thread {
                             setMobileDataEnabled.invoke(connectivityManager,false);
                             out.println("off");
                         }
+                    }
+                    else if(inputLine.equals("turn off"))
+                    {
+                        socketOpened=false;
+                        out.close();
+                        in.close();
+                        serverSocket.close();
+                        break;
                     }
 
                 }
